@@ -1,93 +1,97 @@
-# Kanban Minimal
+# Minimal Accessible Kanban Board
 
-> Tablero Kanban minimalista optimizado para accesibilidad, theming (light/dark) y pruebas visuales.
+A modern, high-performance, and accessible Kanban board built with **Next.js 15**, **React 19**, and **Tailwind CSS v4**.
 
-## 🚀 Características Clave
-- Drag & Drop (mouse) y reordenamiento por teclado (flechas) con mensajes accesibles (live region)
-- Temas Light / Dark persistentes via `localStorage` (sin parpadeos de hidratación)
-- Tokens de diseño centralizados (`src/lib/design-system.ts` + `globals.css`)
-- Jerarquía visual refinada (badges, grips, columnas con blur y elevación)
-- Tests visuales con Playwright (snapshots light/dark + columnas específicas)
-- Arquitectura modular: componentes desacoplados + pequeña store in‑memory (`useKanbanStore`)
-- Accesibilidad: `aria-live`, focos visibles, navegación por teclado, outlines consistentes
+This project demonstrates a robust implementation of a drag-and-drop interface with integrated state management, local persistence, and a fully functional dark mode.
 
-## 📂 Estructura Simplificada
+![Kanban Demo](https://placehold.co/1200x600/1e293b/ffffff?text=Kanban+Board+Preview)
+
+## 🚀 Features
+
+- **Drag & Drop Interface**: Smooth and accessible drag-and-drop powered by `@dnd-kit`. Supports keyboard navigation for accessibility.
+- **Task Management**:
+  - **Create**: Add new tasks to any column.
+  - **Edit**: Update task details (title, priority, assignee) via a modal.
+  - **Delete**: Remove tasks with built-in safeguards.
+  - **Move**: Drag tasks between columns or reorder them within the same column.
+- **Dark Mode**: 
+  - Fully responsive dark/light theme toggle.
+  - System preference detection.
+  - Smooth color transitions and flicker-free hydration.
+- **Persistence**: Automatically saves your board state to `localStorage`.
+- **Modern Tech Stack**: Built on the latest Next.js App Router and React Server Components architecture.
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router, Turbopack)
+- **Library**: [React 19](https://react.dev/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Drag & Drop**: [@dnd-kit](https://dndkit.com/) (Core, Sortable, Utilities)
+- **Testing**: [Vitest](https://vitest.dev/) (Unit) & [Playwright](https://playwright.dev/) (E2E/Visual)
+- **Language**: TypeScript
+
+## 📦 Installation
+
+clone the repository:
+
+```bash
+git clone https://github.com/john2k2/Kanban-minimal.git
+cd Kanban-minimal
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## 🧪 Testing
+
+The project includes a comprehensive test suite.
+
+**Run Unit Tests:**
+```bash
+npm run test:unit
+```
+
+**Run Visual/E2E Tests:**
+```bash
+npm run test:visual
+```
+
+## 📂 Project Structure
+
 ```
 src/
-	app/
-		layout.tsx      // Script inicial tema + layout raíz
-		page.tsx        // Monta el tablero
-	components/kanban/
-		KanbanBoard.tsx // Orquestación dnd + teclado
-		Column.tsx      // Columna
-		TaskCard.tsx    // Tarjeta
-		BoardHeader.tsx // Header + toggle
-		ThemeToggle.tsx // Control tema
-		internal/Avatar.tsx / Badge.tsx
-		useKanbanStore.ts   // Estado y acciones
-	lib/design-system.ts  // Tokens TS
-globals.css             // Tokens CSS + estilos utilitarios
+├── app/               # Next.js App Router pages and layout
+│   └── globals.css    # Global styles & Tailwind v4 config
+├── components/
+│   ├── kanban/        # Core Kanban components
+│   │   ├── internal/  # Internal sub-components (Modals, Forms)
+│   │   ├── Column.tsx
+│   │   ├── TaskCard.tsx
+│   │   └── KanbanBoard.tsx
+│   └── icons/         # SVG Icon system
+├── hooks/             # Custom hooks (useTheme, useKanbanStore)
+├── lib/               # Utilities and UI constants
+└── ...
 ```
 
-## 🛠️ Scripts
-```powershell
-npm install        # Instala dependencias
-npm run dev        # Desarrollo (Turbopack)
-npm run build      # Build producción
-npm run start      # Servir build
-npm run lint       # Linter
-npm run test:visual          # Corre pruebas visuales
-npm run test:visual:update   # Actualiza snapshots
-```
+## 🎨 Theme System
 
-## 🎨 Theming
-- Clase `dark` en `<html>` inicializada inline antes del primer paint.
-- Selectores CSS: `html.dark body` y fallback light = ausencia de `.dark`.
-- Toggle actualiza `localStorage` + clase sin causar mismatch de hidratación.
+The application uses a custom `useTheme` hook combined with Tailwind v4 CSS variables to ensure:
+- Initial render matches system/stored preference (No hydration mismatch).
+- Immediate toggle response.
+- Persistent state across reloads.
 
-## ♿ Accesibilidad
-- Reordenamiento por teclado (flechas ↑ ↓ dentro de columna, ← → entre columnas).
-- Mensajes discretos vía región viva oculta.
-- `focus-visible` con anillo de alto contraste (diferenciado en dark).
+## 📄 License
 
-## 🧪 Visual Testing
-- Playwright guarda snapshots por modo (light/dark) y por columna.
-- Para actualizar tras cambio intencional: `npm run test:visual:update`.
-
-## ✅ Checklist Técnica
-- [x] Estado in‑memory modular
-- [x] DnD + teclado
-- [x] Persistencia de tema
-- [x] Tokens de diseño
-- [x] Pruebas visuales base
-- [x] Reducer testeable + tests unitarios iniciales
-- [ ] Animaciones suaves al insertar tarjeta
-- [ ] Tests adicionales de accesibilidad
-
-## 🔄 Flujo para Crear Nueva Tarjeta
-1. Click en botón de añadir en una columna.
-2. Prompt (prototipo) — en versión futura reemplazar por modal o inline form.
-
-## 🌐 Publicación en GitHub
-1. Crear repositorio vacío (sin README) en GitHub.
-2. Añadir remoto y hacer push (ver sección siguiente).
-3. Activar Actions opcionalmente para CI (Playwright + lint).
-
-## ⬆️ Push Rápido (ejemplo)
-```powershell
-git remote add origin https://github.com/USUARIO/kanban-minimal.git
-git push -u origin main
-```
-Si ya existe un remoto, usar:
-```powershell
-git remote set-url origin https://github.com/USUARIO/kanban-minimal.git
-```
-
-## 📝 Licencia
-MIT (ver archivo `LICENSE`).
-
-## 📈 Tracking de Mejoras
-Ver `docs/IMPROVEMENT-TRACKING.md` para historial y backlog vivo.
-
----
-Siente libre de abrir issues o mejorar la animación / accesibilidad avanzada.
+This project is open source and available under the [MIT License](LICENSE).
