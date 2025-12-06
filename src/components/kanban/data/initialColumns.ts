@@ -1,0 +1,110 @@
+import type { Column } from "../types";
+
+// Datos iniciales extraídos para permitir test y futura persistencia
+export const initialColumns: Column[] = [
+  {
+    id: "todo",
+    title: "To do",
+    accent: "bg-[var(--color-col-todo)]",
+    tasks: [
+      {
+        id: "todo-1",
+        title: "Get access to UTM tags",
+        status: "todo",
+        ticket: "BE-1723",
+        state: "To Do",
+        priority: "high",
+        assignees: ["Jules"],
+      },
+      {
+        id: "todo-2",
+        title: "Configure payment gateway",
+        status: "todo",
+        state: "To Do",
+        priority: "high",
+        assignees: ["Jules"],
+      },
+      {
+        id: "todo-3",
+        title: "Embed iframe with parameter referrerpolicy",
+        status: "todo",
+        state: "uncompleted",
+        priority: "medium",
+        dueDate: "2025-06-17",
+        assignees: ["Casie", "Travis"],
+      },
+      {
+        id: "todo-4",
+        title: "Connect to the PROD database",
+        status: "todo",
+        state: "Done",
+        priority: "low",
+        contentTag: "Content",
+        assignees: ["Trevor"],
+      },
+    ],
+  },
+  {
+    id: "in_progress",
+    title: "In progress",
+    accent: "bg-[var(--color-col-progress)]",
+    tasks: [
+      {
+        id: "prog-1",
+        title: "Get new photos to photos preview",
+        status: "in_progress",
+        state: "In Progress",
+        priority: "medium",
+        dueDate: "2025-06-10",
+        assignees: ["Jonas"],
+      },
+      {
+        id: "prog-2",
+        title: "Integrate these GTM codes into the game",
+        status: "in_progress",
+        state: "In Progress",
+        priority: "high",
+        ticket: "BE-1819",
+        assignees: ["Leslie"],
+      },
+      {
+        id: "prog-3",
+        title: "Asynchronous upload",
+        status: "in_progress",
+        state: "In Progress",
+        priority: "low",
+      },
+      {
+        id: "prog-4",
+        title: 'Embed iframe to "About" page',
+        status: "in_progress",
+        state: "To Do",
+        ticket: "BE-1723",
+        assignees: ["Jules"],
+      },
+    ],
+  },
+  {
+    id: "done",
+    title: "Done",
+    accent: "bg-[var(--color-col-done)]",
+    tasks: [
+      {
+        id: "done-1",
+        title: "Provide access to GitHub",
+        status: "done",
+        state: "Done",
+        ticket: "BE-2113",
+        assignees: ["Jules"],
+      },
+      {
+        id: "done-2",
+        title: "Protect the API server",
+        status: "done",
+        state: "Done",
+        contentTag: "Content",
+        assignees: ["Trevor"],
+      },
+    ],
+  },
+];

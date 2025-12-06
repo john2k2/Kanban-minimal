@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+/* Definir variante dark para Tailwind v4 que funcione con la clase .dark */
+@variant dark (&:where(.dark, .dark *));
+
+/* Resto de estilos */
+:root {
+    /* Core variables */
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 0, 0, 0;
+    }
+}
+
+/* Minimal reset */
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar utilities */
+.scrollbar-thin {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+    display: none;
+}
+
+/* Theme toggle styles */
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+}
+
+.theme-toggle button {
+    position: relative;
+    width: 52px;
+    height: 24px;
+    background: #e2e8f0;
+    border: 1px solid #cbd5e1;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .25s, border-color .25s;
+}
+
+.dark .theme-toggle button {
+    background: #334155;
+    border-color: #475569;
+}
+
+.theme-toggle button .thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+    transition: transform .28s cubic-bezier(.65, .05, .36, 1);
+    z-index: 1;
+}
+
+.dark .theme-toggle button .thumb {
+    background: #1e293b;
+}
+
+.theme-toggle button[aria-pressed="true"] .thumb {
+    transform: translateX(24px);
+}
+
+.theme-toggle .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #475569;
+    transition: opacity .25s, color .25s;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.dark .theme-toggle .icon {
+    color: #94a3b8;
+}
+
+.theme-toggle .icon.sun {
+    left: 5px;
+}
+
+.theme-toggle .icon.moon {
+    right: 5px;
+}
+
+.theme-toggle button[aria-pressed="true"] .icon.sun {
+    opacity: 0;
+}
+
+.theme-toggle button[aria-pressed="false"] .icon.moon {
+    opacity: 0;
+}
+
+/* Drag placeholder */
+.drag-placeholder {
+    border: 2px dashed #2563eb;
+    border-radius: 6px;
+    background: repeating-linear-gradient(45deg, rgba(37, 99, 235, .05), rgba(37, 99, 235, .05) 6px, rgba(37, 99, 235, .1) 6px, rgba(37, 99, 235, .1) 12px);
+}
+
+.dark .drag-placeholder {
+    background: repeating-linear-gradient(45deg, rgba(96, 165, 250, .06), rgba(96, 165, 250, .06) 6px, rgba(96, 165, 250, .12) 6px, rgba(96, 165, 250, .12) 12px);
+}
+
+/* Animations */
+@keyframes card-pop-in {
+    0% {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.animate-card-pop-in {
+    animation: card-pop-in 0.2s ease-out forwards;
+}
+
+/* Form elements */
+input,
+select,
+textarea {
+    font-size: 14px;
+}
